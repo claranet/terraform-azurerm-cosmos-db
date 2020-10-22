@@ -1,21 +1,31 @@
 resource "azurerm_cosmosdb_account" "db" {
-  name                = var.custom_name == "" ? "cosmodb-${var.environment}-${var.azure_region_short}-${var.stack}" : var.custom_name
+  name = coalesce(
+    var.custom_server_name,
+    local.default_name_server,
+  )
+
   location            = var.location
-  resource_group_name = var.rg_name
-  offer_type          = "Standard"
-  kind                = var.kind
+  resource_group_name = var.resource_group_name
+
+  offer_type = var.offer_type
+  kind       = var.kind
 
   enable_automatic_failover = true
+
+  dynamic "geo_location" {
+    for_each = var.failover_locations
+    content {
+      prefix            = geo_location.key
+      location          = geo_location.value.location
+      failover_priority = lookup(geo_location.value, "priority", 0)
+      zone_redundant    = lookup(geo_location.value, "zone_redundant", false)
+    }
+  }
 
   consistency_policy {
     consistency_level       = "BoundedStaleness"
     max_interval_in_seconds = 10
     max_staleness_prefix    = 200
-  }
-
-  geo_location {
-    location          = var.failover_location
-    failover_priority = 0
   }
 
   dynamic "capabilities" {
@@ -25,15 +35,7 @@ resource "azurerm_cosmosdb_account" "db" {
     }
   }
 
-  ip_range_filter = join(",", concat(var.authorized_ips, module.common_variables.cosmos_portal_ips))
+  ip_range_filter = join(",", var.ip_range_filter)
 
-  tags = merge(
-    var.custom_tags,
-    module.tags.asset_custom_tags,
-    {
-      dd_azure_cosmosdb = "enabled"
-      name              = "${var.stack}-${var.azure_region_short}-${var.environment}-cosmos"
-      DeploymentDate    = var.deploymentdate
-    }
-  )
+  tags = merge(local.default_tags, var.extra_tags)
 }
