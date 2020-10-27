@@ -78,7 +78,7 @@ EOD
   default     = []
 }
 
-variable "ip_range_filter" {
+variable "allowed_cidrs" {
   type        = list(string)
   description = "CosmosDB Firewall Support: This value specifies the set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IP's for a given database account."
   default     = []

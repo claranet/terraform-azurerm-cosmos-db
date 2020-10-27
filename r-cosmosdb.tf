@@ -35,7 +35,7 @@ resource "azurerm_cosmosdb_account" "db" {
     }
   }
 
-  ip_range_filter = join(",", var.ip_range_filter)
+  ip_range_filter = join(",", var.allowed_cidrs)
 
   is_virtual_network_filter_enabled = var.is_virtual_network_filter_enabled
 
