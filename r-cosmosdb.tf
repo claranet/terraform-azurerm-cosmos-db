@@ -23,9 +23,9 @@ resource "azurerm_cosmosdb_account" "db" {
   }
 
   consistency_policy {
-    consistency_level       = "BoundedStaleness"
-    max_interval_in_seconds = 10
-    max_staleness_prefix    = 200
+    consistency_level       = var.consistency_policy_level
+    max_interval_in_seconds = var.consistency_policy_max_interval_in_seconds
+    max_staleness_prefix    = var.consistency_policy_max_staleness_prefix
   }
 
   dynamic "capabilities" {
@@ -36,6 +36,15 @@ resource "azurerm_cosmosdb_account" "db" {
   }
 
   ip_range_filter = join(",", var.ip_range_filter)
+
+  is_virtual_network_filter_enabled = var.is_virtual_network_filter_enabled
+  dynamic "virtual_network_rule" {
+    for_each = var.virtual_network_rule != null ? toset(var.virtual_network_rule) : []
+    content {
+      id = virtual_network_rule.value.id
+      ignore_missing_vnet_service_endpoint = virtual_network_rule.value.ignore_missing_vnet_service_endpoint
+    }
+  }
 
   tags = merge(local.default_tags, var.extra_tags)
 }
