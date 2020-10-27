@@ -13,7 +13,7 @@ resource "azurerm_cosmosdb_account" "db" {
   enable_automatic_failover = true
 
   dynamic "geo_location" {
-    for_each = var.failover_locations
+    for_each = var.failover_locations != null ? var.failover_locations : local.default_failover_locations
     content {
       prefix            = geo_location.key
       location          = geo_location.value.location
@@ -38,10 +38,11 @@ resource "azurerm_cosmosdb_account" "db" {
   ip_range_filter = join(",", var.ip_range_filter)
 
   is_virtual_network_filter_enabled = var.is_virtual_network_filter_enabled
+
   dynamic "virtual_network_rule" {
     for_each = var.virtual_network_rule != null ? toset(var.virtual_network_rule) : []
     content {
-      id = virtual_network_rule.value.id
+      id                                   = virtual_network_rule.value.id
       ignore_missing_vnet_service_endpoint = virtual_network_rule.value.ignore_missing_vnet_service_endpoint
     }
   }

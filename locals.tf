@@ -8,6 +8,12 @@ locals {
     stack = var.stack
   }
 
+  default_failover_locations = {
+    default = {
+      location = var.location
+    }
+  }
+
   cosmosdb_logs = {
     DataPlaneRequests = {
       enabled        = false
