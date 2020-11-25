@@ -84,32 +84,6 @@ variable "allowed_cidrs" {
   default     = []
 }
 
-## Diagnostics options
-
-variable "enable_diag_settings" {
-  default = false
-}
-
-variable "eventhub_namespace_name" {
-  type    = string
-  default = null
-}
-
-variable "eventhub_namespace_rg" {
-  type    = string
-  default = null
-}
-
-variable "eventhub_name" {
-  type    = string
-  default = null
-}
-
-variable "log_analytics_workspace_id" {
-  type    = string
-  default = null
-}
-
 variable "is_virtual_network_filter_enabled" {
   description = "Enables virtual network filtering for this Cosmos DB account"
   type        = bool
@@ -141,4 +115,11 @@ variable "consistency_policy_max_staleness_prefix" {
   description = "When used with the Bounded Staleness consistency level, this value represents the number of stale requests tolerated. Accepted range for this value is 10 – 2147483647. Defaults to 100. Required when consistency_level is set to BoundedStaleness."
   type        = number
   default     = 200
+}
+
+## Diagnostics options
+
+variable "logs_destinations_ids" {
+  type        = list(string)
+  description = "List of destination resources IDs for logs diagnostic destination. Can be Storage Account, Log Analytics Workspace and Event Hub. No more than one of each can be set."
 }

@@ -1,16 +1,9 @@
-# module "diagnostic_settings" {
-#   #source = "git::https://github.com/claranet/terraform-azurerm-diagnostic-settings.git"
-#   source = "../diagnostic_settings"
+module "logging" {
+  count = var.logs_destinations_ids != [] ? 1 : 0
 
-#   target_resource_id = azurerm_cosmosdb_account.db.id
+  source = "git::ssh://git@git.fr.clara.net/claranet/projects/cloud/azure/terraform/modules/diagnostic-settings.git?ref=AZ-273_tf013"
 
-#   enable_diag_settings = var.enable_diag_settings
-#   logs                 = local.cosmosdb_logs
+  resource_id = azurerm_cosmosdb_account.db.id
 
-#   log_analytics_workspace_id = var.log_analytics_workspace_id
-
-#   eventhub_namespace_name = var.eventhub_namespace_name
-#   eventhub_namespace_rg   = var.eventhub_namespace_rg
-
-#   eventhub_name = var.eventhub_name
-# }
+  logs_destinations_ids = var.logs_destinations_ids
+}
