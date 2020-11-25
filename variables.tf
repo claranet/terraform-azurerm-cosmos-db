@@ -84,6 +84,32 @@ variable "allowed_cidrs" {
   default     = []
 }
 
+## Diagnostics options
+
+variable "enable_diag_settings" {
+  default = false
+}
+
+variable "eventhub_namespace_name" {
+  type    = string
+  default = null
+}
+
+variable "eventhub_namespace_rg" {
+  type    = string
+  default = null
+}
+
+variable "eventhub_name" {
+  type    = string
+  default = null
+}
+
+variable "log_analytics_workspace_id" {
+  type    = string
+  default = null
+}
+
 variable "is_virtual_network_filter_enabled" {
   description = "Enables virtual network filtering for this Cosmos DB account"
   type        = bool
