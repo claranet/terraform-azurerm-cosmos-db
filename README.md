@@ -49,6 +49,8 @@ module "cosmosdb" {
 
   resource_group_name = module.rg.resource_group_name
 
+  logs_destinations_ids = [module.run-common.log_analytics_workspace_id]
+
   extra_tags = {
     managed_by            = "Terraform"
     foo                   = "bar"
