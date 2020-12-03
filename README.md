@@ -49,6 +49,8 @@ module "cosmosdb" {
 
   resource_group_name = module.rg.resource_group_name
 
+  logs_destinations_ids = [module.run-common.log_analytics_workspace_id]
+
   extra_tags = {
     managed_by            = "Terraform"
     foo                   = "bar"
@@ -75,12 +77,12 @@ module "cosmosdb" {
 | kind | Specifies the Kind of CosmosDB to create - possible values are `GlobalDocumentDB` and `MongoDB`. | `string` | `"GlobalDocumentDB"` | no |
 | location | Azure location for Key Vault. | `string` | n/a | yes |
 | location\_short | Short string for Azure location. | `string` | n/a | yes |
+| logs\_destinations\_ids | List of destination resources IDs for logs diagnostic destination. Can be Storage Account, Log Analytics Workspace and Event Hub. No more than one of each can be set. | `list(string)` | n/a | yes |
 | name\_prefix | Optional prefix for PostgreSQL server name | `string` | `""` | no |
 | offer\_type | Specifies the Offer Type to use for this CosmosDB Account - currently this can only be set to Standard. | `string` | `"Standard"` | no |
 | resource\_group\_name | Name of the application ressource group, herited from infra module | `string` | n/a | yes |
 | stack | Name of application stack | `string` | n/a | yes |
-| virtual\_network\_rule | Specifues a virtual\_network\_rules resource used to define which subnets are allowed to access this CosmosDB account | <pre>list(object({<br>    id
-            = string,<br>    ignore_missing_vnet_service_endpoint = bool<br>  }))</pre> | `null` | no |
+| virtual\_network\_rule | Specifues a virtual\_network\_rules resource used to define which subnets are allowed to access this CosmosDB account | <pre>list(object({<br>    id                                   = string,<br>    ignore_missing_vnet_service_endpoint = bool<br>  }))</pre> | `null` | no |
 
 ## Outputs
 
