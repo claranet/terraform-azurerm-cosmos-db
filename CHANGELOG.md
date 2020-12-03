@@ -1,4 +1,4 @@
-# v4.0.0 - unreleased
+# v4.0.0 - 2020-12-03
 
 Added
   * AZ-79: Enable diagnostics settings option
