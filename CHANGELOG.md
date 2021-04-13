@@ -1,4 +1,4 @@
-# Unreleased
+# v4.0.1 - 2021-04-13
 
 Fixed
   * AZ-480: Fix `cosmosdb_connection_strings` output
