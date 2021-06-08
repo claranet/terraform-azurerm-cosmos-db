@@ -1,3 +1,5 @@
 .terraform
 main.tf
 terraform.tfvars
+.idea/
+*.iml
