@@ -48,4 +48,13 @@ resource "azurerm_cosmosdb_account" "db" {
   }
 
   tags = merge(local.default_tags, var.extra_tags)
+
+  dynamic "backup" {
+    for_each = length(var.backup) > 0 ? ["_"] : []
+    content {
+      type                = var.backup.type
+      interval_in_minutes = var.backup.interval_in_minutes
+      retention_in_hours  = var.backup.retention_in_hours
+    }
+  }
 }
