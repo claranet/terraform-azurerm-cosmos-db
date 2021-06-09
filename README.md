@@ -83,6 +83,7 @@ module "cosmosdb" {
 | resource\_group\_name | Name of the application ressource group, herited from infra module | `string` | n/a | yes |
 | stack | Name of application stack | `string` | n/a | yes |
 | virtual\_network\_rule | Specifues a virtual\_network\_rules resource used to define which subnets are allowed to access this CosmosDB account | <pre>list(object({<br>    id                                   = string,<br>    ignore_missing_vnet_service_endpoint = bool<br>  }))</pre> | `null` | no |
+| backup | Backup block with type (Continuous / Periodic), interval_in_minutes and retention_in_hours keys| <pre>map({<br>    type                = string,<br>    retention_in_hours  = number,<br>    interval_in_minutes = number<br>  })</pre> | `{}` | no |
 
 ## Outputs
 
