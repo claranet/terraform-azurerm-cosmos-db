@@ -126,6 +126,10 @@ variable "logs_destinations_ids" {
 
 variable "backup" {
   type        = map(string)
-  default     = {}
   description = "Backup block with type (Continuous / Periodic), interval_in_minutes and retention_in_hours keys"
+  default = {
+    type                = "Periodic"
+    interval_in_minutes = 3 * 60
+    retention_in_hours  = 7 * 24
+  }
 }

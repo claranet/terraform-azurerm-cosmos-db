@@ -52,9 +52,9 @@ resource "azurerm_cosmosdb_account" "db" {
   dynamic "backup" {
     for_each = var.backup != null ? ["_"] : []
     content {
-      type                = lookup(var.backup, "type", "Periodic")
-      interval_in_minutes = lookup(var.backup, "interval_in_minutes", 3 * 60)
-      retention_in_hours  = lookup(var.backup, "retention_in_hours", 7 * 24)
+      type                = lookup(var.backup, "type", null)
+      interval_in_minutes = lookup(var.backup, "interval_in_minutes", null)
+      retention_in_hours  = lookup(var.backup, "retention_in_hours", null)
     }
   }
 }
