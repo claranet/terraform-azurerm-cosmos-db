@@ -50,11 +50,11 @@ resource "azurerm_cosmosdb_account" "db" {
   tags = merge(local.default_tags, var.extra_tags)
 
   dynamic "backup" {
-    for_each = length(var.backup) > 0 ? ["_"] : []
+    for_each = var.backup != null ? ["_"] : []
     content {
-      type                = var.backup.type
-      interval_in_minutes = var.backup.interval_in_minutes
-      retention_in_hours  = var.backup.retention_in_hours
+      type                = lookup(var.backup, "type", null)
+      interval_in_minutes = lookup(var.backup, "interval_in_minutes", null)
+      retention_in_hours  = lookup(var.backup, "retention_in_hours", null)
     }
   }
 }
