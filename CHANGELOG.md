@@ -1,4 +1,4 @@
-# v4.1.0 - unreleased
+# v4.1.0 - 2021-06-11
 
 Added
   * [GITHUB-2](https://github.com/claranet/terraform-azurerm-cosmos-db/pull/2): Backup option
