@@ -15,7 +15,6 @@ resource "azurerm_cosmosdb_account" "db" {
   dynamic "geo_location" {
     for_each = var.failover_locations != null ? var.failover_locations : local.default_failover_locations
     content {
-      prefix            = geo_location.key
       location          = geo_location.value.location
       failover_priority = lookup(geo_location.value, "priority", 0)
       zone_redundant    = lookup(geo_location.value, "zone_redundant", false)
