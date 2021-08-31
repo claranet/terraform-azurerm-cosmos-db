@@ -19,17 +19,17 @@ variable "resource_group_name" {
 }
 
 variable "location" {
-  description = "Azure location for Key Vault."
+  description = "Azure region to use"
   type        = string
 }
 
 variable "location_short" {
-  description = "Short string for Azure location."
+  description = "Short string for Azure location/region"
   type        = string
 }
 
 variable "name_prefix" {
-  description = "Optional prefix for PostgreSQL server name"
+  description = "Optional prefix for resource name"
   type        = string
   default     = ""
 }
