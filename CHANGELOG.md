@@ -1,3 +1,8 @@
+# v4.1.2 - 2021-09-03
+
+Fixed
+  * AZ-532: Fix variables description and README
+
 # v4.1.1 - 2021-08-30
 
 Changed
