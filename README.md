@@ -102,10 +102,10 @@ module "cosmosdb" {
 | failover\_locations | The name of the Azure region to host replicated data and their priority. | `map(map(string))` | `null` | no |
 | is\_virtual\_network\_filter\_enabled | Enables virtual network filtering for this Cosmos DB account | `bool` | `false` | no |
 | kind | Specifies the Kind of CosmosDB to create - possible values are `GlobalDocumentDB` and `MongoDB`. | `string` | `"GlobalDocumentDB"` | no |
-| location | Azure location for Key Vault. | `string` | n/a | yes |
-| location\_short | Short string for Azure location. | `string` | n/a | yes |
+| location | Azure region to use | `string` | n/a | yes |
+| location\_short | Short string for Azure location/region | `string` | n/a | yes |
 | logs\_destinations\_ids | List of destination resources IDs for logs diagnostic destination. Can be Storage Account, Log Analytics Workspace and Event Hub. No more than one of each can be set. | `list(string)` | n/a | yes |
-| name\_prefix | Optional prefix for PostgreSQL server name | `string` | `""` | no |
+| name\_prefix | Optional prefix for resource name | `string` | `""` | no |
 | offer\_type | Specifies the Offer Type to use for this CosmosDB Account - currently this can only be set to Standard. | `string` | `"Standard"` | no |
 | resource\_group\_name | Name of the application ressource group, herited from infra module | `string` | n/a | yes |
 | stack | Name of application stack | `string` | n/a | yes |
