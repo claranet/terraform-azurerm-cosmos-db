@@ -4,12 +4,13 @@
 This terraform module creates an [Azure CosmosDB](https://docs.microsoft.com/en-us/azure/cosmos-db/introduction).
 [Diagnostic settings](https://docs.microsoft.com/en-us/azure/diagnostics) are also deployed.
 
-## Version compatibility
+<!-- BEGIN_TF_DOCS -->
+## Global versionning rule for Claranet Azure modules
 
 | Module version | Terraform version | AzureRM version |
 | -------------- | ----------------- | --------------- |
-| >= 5.x.x       | 0.15.x & 1.0.x    | >= 2.62         |
-| >= 4.x.x       | 0.13.x            | >= 2.62         |
+| >= 5.x.x       | 0.15.x & 1.0.x    | >= 2.0          |
+| >= 4.x.x       | 0.13.x            | >= 2.0          |
 | >= 3.x.x       | 0.12.x            | >= 2.0          |
 | >= 2.x.x       | 0.12.x            | < 2.0           |
 | <  2.x.x       | 0.11.x            | < 2.0           |
@@ -21,7 +22,7 @@ which set some terraform variables in the environment needed by this module.
 More details about variables set by the `terraform-wrapper` available in the [documentation](https://github.com/claranet/terraform-wrapper#environment).
 
 ```hcl
-module "azure-region" {
+module "azure_region" {
   source  = "claranet/regions/azurerm"
   version = "x.x.x"
 
@@ -32,10 +33,22 @@ module "rg" {
   source  = "claranet/rg/azurerm"
   version = "x.x.x"
 
-  location    = module.azure-region.location
+  location    = module.azure_region.location
   client_name = var.client_name
   environment = var.environment
   stack       = var.stack
+}
+
+module "logs" {
+  source  = "claranet/run-common/azurerm//modules/logs"
+  version = "x.x.x"
+
+  client_name         = var.client_name
+  environment         = var.environment
+  stack               = var.stack
+  location            = module.azure_region.location
+  location_short      = module.azure_region.location_short
+  resource_group_name = module.rg.resource_group_name
 }
 
 module "cosmosdb" {
@@ -43,14 +56,14 @@ module "cosmosdb" {
   version = "x.x.x"
 
   environment    = var.environment
-  location       = module.azure-region.location
-  location_short = module.azure-region.location_short
+  location       = module.azure_region.location
+  location_short = module.azure_region.location_short
   client_name    = var.client_name
   stack          = var.stack
 
   resource_group_name = module.rg.resource_group_name
 
-  logs_destinations_ids = [module.run-common.log_analytics_workspace_id]
+  logs_destinations_ids = [module.logs.log_analytics_workspace_id]
 
   backup = {
     type                = "Periodic"
@@ -64,9 +77,9 @@ module "cosmosdb" {
     monitor_autoscale_max = 2
   }
 }
+
 ```
 
-<!-- BEGIN_TF_DOCS -->
 ## Providers
 
 | Name | Version |
