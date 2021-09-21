@@ -5,7 +5,7 @@ This terraform module creates an [Azure CosmosDB](https://docs.microsoft.com/en-
 [Diagnostic settings](https://docs.microsoft.com/en-us/azure/diagnostics) are also deployed.
 
 <!-- BEGIN_TF_DOCS -->
-## Global versionning rule for Claranet Azure modules
+## Global versioning rule for Claranet Azure modules
 
 | Module version | Terraform version | AzureRM version |
 | -------------- | ----------------- | --------------- |
