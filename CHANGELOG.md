@@ -3,6 +3,9 @@
 Breaking
   * AZ-515: Option to use Azure CAF naming provider to name resources
 
+Added
+  * AZ-615: Add an option to enable or disable default tags
+
 Changed
   * AZ-572: Revamp examples and improve CI
 

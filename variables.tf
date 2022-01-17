@@ -28,12 +28,6 @@ variable "location_short" {
   type        = string
 }
 
-variable "extra_tags" {
-  type        = map(string)
-  description = "Map of custom tags"
-  default     = {}
-}
-
 ## Specific CosmosDB parameters
 
 variable "offer_type" {
