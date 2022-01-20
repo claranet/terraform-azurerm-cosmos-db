@@ -1,8 +1,5 @@
 resource "azurerm_cosmosdb_account" "db" {
-  name = coalesce(
-    var.custom_server_name,
-    local.default_name_server,
-  )
+  name = local.cosmosdb_name
 
   location            = var.location
   resource_group_name = var.resource_group_name
