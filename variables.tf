@@ -42,6 +42,12 @@ variable "kind" {
   default     = "GlobalDocumentDB"
 }
 
+variable "mongo_server_version" {
+  description = "The Server Version of a MongoDB account. Possible values are `4.0`, `3.6`, and `3.2`."
+  type        = string
+  default     = "4.0"
+}
+
 variable "failover_locations" {
   type        = map(map(string))
   description = "The name of the Azure region to host replicated data and their priority."
