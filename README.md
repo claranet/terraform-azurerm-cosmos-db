@@ -85,7 +85,7 @@ module "cosmosdb" {
 | Name | Version |
 |------|---------|
 | azurecaf | ~> 1.1 |
-| azurerm | >= 2.79 |
+| azurerm | >= 2.87 |
 
 ## Modules
 

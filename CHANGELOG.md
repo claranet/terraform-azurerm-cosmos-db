@@ -2,7 +2,7 @@
 
 Added
   * AZ-716: Add `mongo_server_version` parameter option
-  * AZ-716: Add more new parameters for `analytical_storage`
+  * AZ-716: Add more new parameters for `analytical_storage`, require provider `v2.87` minimum version
 
 # v5.0.0 - 2022-02-03
 
