@@ -119,3 +119,15 @@ variable "backup" {
     retention_in_hours  = 7 * 24
   }
 }
+
+variable "analytical_storage_enabled" {
+  description = "Enable Analytical Storage option for this Cosmos DB account. Defaults to false. Changing this forces a new resource to be created."
+  type        = bool
+  default     = false
+}
+
+variable "analytical_storage_type" {
+  description = "The schema type of the Analytical Storage for this Cosmos DB account. Possible values are `FullFidelity` and `WellDefined`."
+  type        = string
+  default     = null
+}

@@ -10,6 +10,15 @@ resource "azurerm_cosmosdb_account" "db" {
 
   enable_automatic_failover = true
 
+  analytical_storage_enabled = var.analytical_storage_enabled
+
+  dynamic "analytical_storage" {
+    for_each = var.analytical_storage_type != null ? ["enabled"] : []
+    content {
+      schema_type = var.analytical_storage_type
+    }
+  }
+
   dynamic "geo_location" {
     for_each = var.failover_locations != null ? var.failover_locations : local.default_failover_locations
     content {
@@ -44,8 +53,6 @@ resource "azurerm_cosmosdb_account" "db" {
     }
   }
 
-  tags = merge(local.default_tags, var.extra_tags)
-
   dynamic "backup" {
     for_each = var.backup != null ? ["_"] : []
     content {
@@ -54,4 +61,6 @@ resource "azurerm_cosmosdb_account" "db" {
       retention_in_hours  = lookup(var.backup, "retention_in_hours", null)
     }
   }
+
+  tags = merge(local.default_tags, var.extra_tags)
 }
