@@ -1,4 +1,9 @@
-# v5.0.0 - 2022-0203
+# Unreleased
+
+Added
+  * AZ-716: Add `mongo_server_version` parameter option
+
+# v5.0.0 - 2022-02-03
 
 Breaking
   * AZ-515: Option to use Azure CAF naming provider to name resources

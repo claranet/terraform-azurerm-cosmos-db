@@ -42,6 +42,17 @@ variable "kind" {
   default     = "GlobalDocumentDB"
 }
 
+variable "mongo_server_version" {
+  description = "The Server Version of a MongoDB account. Possible values are `4.0`, `3.6`, and `3.2`."
+  type        = string
+  default     = "4.0"
+
+  validation {
+    condition     = contains(["3.2", "3.6", "4.0"], var.mongo_server_version)
+    error_message = "The `mongo_server_version` value must be a valid version. Possible values are `4.0`, `3.6`, and `3.2`."
+  }
+}
+
 variable "failover_locations" {
   type        = map(map(string))
   description = "The name of the Azure region to host replicated data and their priority."

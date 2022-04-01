@@ -4,8 +4,9 @@ resource "azurerm_cosmosdb_account" "db" {
   location            = var.location
   resource_group_name = var.resource_group_name
 
-  offer_type = var.offer_type
-  kind       = var.kind
+  offer_type           = var.offer_type
+  kind                 = var.kind
+  mongo_server_version = var.kind == "MongoDB" ? var.mongo_server_version : null
 
   enable_automatic_failover = true
 
