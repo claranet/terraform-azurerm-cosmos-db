@@ -121,7 +121,7 @@ variable "backup" {
 }
 
 variable "analytical_storage_enabled" {
-  description = "Enable Analytical Storage option for this Cosmos DB account. Defaults to false. Changing this forces a new resource to be created."
+  description = "Enable Analytical Storage option for this Cosmos DB account. Defaults to `false`. Changing this forces a new resource to be created."
   type        = bool
   default     = false
 }
@@ -130,4 +130,9 @@ variable "analytical_storage_type" {
   description = "The schema type of the Analytical Storage for this Cosmos DB account. Possible values are `FullFidelity` and `WellDefined`."
   type        = string
   default     = null
+
+  validation {
+    condition     = try(contains(["FullFidelity", "WellDefined"], var.analytical_storage_type), true)
+    error_message = "The `analytical_storage_type` value must be valid. Possible values are `FullFidelity` and `WellDefined`."
+  }
 }
