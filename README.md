@@ -85,7 +85,7 @@ module "cosmosdb" {
 | Name | Version |
 |------|---------|
 | azurecaf | ~> 1.1 |
-| azurerm | >= 2.79 |
+| azurerm | >= 2.87 |
 
 ## Modules
 
@@ -105,6 +105,8 @@ module "cosmosdb" {
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | allowed\_cidrs | CosmosDB Firewall Support: This value specifies the set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IP's for a given database account. | `list(string)` | `[]` | no |
+| analytical\_storage\_enabled | Enable Analytical Storage option for this Cosmos DB account. Defaults to `false`. Changing this forces a new resource to be created. | `bool` | `false` | no |
+| analytical\_storage\_type | The schema type of the Analytical Storage for this Cosmos DB account. Possible values are `FullFidelity` and `WellDefined`. | `string` | `null` | no |
 | backup | Backup block with type (Continuous / Periodic), interval\_in\_minutes and retention\_in\_hours keys | `map(string)` | <pre>{<br>  "interval_in_minutes": 180,<br>  "retention_in_hours": 168,<br>  "type": "Periodic"<br>}</pre> | no |
 | capabilities | Configures the capabilities to enable for this Cosmos DB account:<br>Possible values are<br>  AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses,<br>  EnableAggregationPipeline, EnableCassandra, EnableGremlin,EnableMongo, EnableTable, EnableServerless,<br>  MongoDBv3.4 and mongoEnableDocLevelTTL. | `list(string)` | `[]` | no |
 | client\_name | Name of client | `string` | n/a | yes |
