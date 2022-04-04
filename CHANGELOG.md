@@ -1,4 +1,4 @@
-# Unreleased
+# v5.1.0 - 2022-04-04
 
 Added
   * AZ-716: Add `mongo_server_version` parameter option
