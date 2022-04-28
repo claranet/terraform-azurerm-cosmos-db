@@ -1,3 +1,8 @@
+# v6.0.0 - Unreleased
+
+Breaking
+  * AZ-717: Update to AzureRM provider v3
+
 # v5.1.0 - 2022-04-04
 
 Added
