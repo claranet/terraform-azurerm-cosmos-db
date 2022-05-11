@@ -25,25 +25,25 @@ output "cosmosdb_write_endpoints" {
 
 output "cosmosdb_primary_master_key" {
   description = "The Primary master key for the CosmosDB Account."
-  value       = azurerm_cosmosdb_account.db.primary_master_key
+  value       = azurerm_cosmosdb_account.db.primary_key
   sensitive   = true
 }
 
 output "cosmosdb_secondary_master_key" {
   description = " The Secondary master key for the CosmosDB Account."
-  value       = azurerm_cosmosdb_account.db.secondary_master_key
+  value       = azurerm_cosmosdb_account.db.secondary_key
   sensitive   = true
 }
 
 output "cosmosdb_primary_readonly_master_key" {
   description = "The Primary read-only master Key for the CosmosDB Account."
-  value       = azurerm_cosmosdb_account.db.primary_readonly_master_key
+  value       = azurerm_cosmosdb_account.db.primary_readonly_key
   sensitive   = true
 }
 
 output "cosmosdb_secondary_readonly_master_key" {
   description = "The Secondary read-only master key for the CosmosDB Account."
-  value       = azurerm_cosmosdb_account.db.secondary_readonly_master_key
+  value       = azurerm_cosmosdb_account.db.secondary_readonly_key
   sensitive   = true
 }
 
