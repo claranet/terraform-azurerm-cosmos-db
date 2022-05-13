@@ -107,7 +107,7 @@ module "cosmosdb" {
 | allowed\_cidrs | CosmosDB Firewall Support: This value specifies the set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IP's for a given database account. | `list(string)` | `[]` | no |
 | analytical\_storage\_enabled | Enable Analytical Storage option for this Cosmos DB account. Defaults to `false`. Changing this forces a new resource to be created. | `bool` | `false` | no |
 | analytical\_storage\_type | The schema type of the Analytical Storage for this Cosmos DB account. Possible values are `FullFidelity` and `WellDefined`. | `string` | `null` | no |
-| backup | Backup block with type (Continuous / Periodic), interval\_in\_minutes and retention\_in\_hours keys | `map(string)` | <pre>{<br>  "interval_in_minutes": 180,<br>  "retention_in_hours": 168,<br>  "type": "Periodic"<br>}</pre> | no |
+| backup | Backup block with type (Continuous / Periodic), interval\_in\_minutes and retention\_in\_hours keys | <pre>object({<br>    type                = string<br>    interval_in_minutes = number<br>    retention_in_hours  = number<br>  })</pre> | <pre>{<br>  "interval_in_minutes": 180,<br>  "retention_in_hours": 168,<br>  "type": "Periodic"<br>}</pre> | no |
 | capabilities | Configures the capabilities to enable for this Cosmos DB account:<br>Possible values are<br>  AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses,<br>  EnableAggregationPipeline, EnableCassandra, EnableGremlin,EnableMongo, EnableTable, EnableServerless,<br>  MongoDBv3.4 and mongoEnableDocLevelTTL. | `list(string)` | `[]` | no |
 | client\_name | Name of client | `string` | n/a | yes |
 | consistency\_policy\_level | Consistency policy level. Allowed values are `BoundedStaleness`, `Eventual`, `Session`, `Strong` or `ConsistentPrefix` | `string` | `"BoundedStaleness"` | no |
@@ -134,7 +134,7 @@ module "cosmosdb" {
 | resource\_group\_name | Name of the application ressource group, herited from infra module | `string` | n/a | yes |
 | stack | Name of application stack | `string` | n/a | yes |
 | use\_caf\_naming | Use the Azure CAF naming provider to generate default resource name. `custom_server_name` override this if set. Legacy default name is used if this is set to `false`. | `bool` | `true` | no |
-| virtual\_network\_rule | Specifues a virtual\_network\_rules resource used to define which subnets are allowed to access this CosmosDB account | <pre>list(object({<br>    id                                   = string,<br>    ignore_missing_vnet_service_endpoint = bool<br>  }))</pre> | `null` | no |
+| virtual\_network\_rule | Specifies a virtual\_network\_rules resource used to define which subnets are allowed to access this CosmosDB account | <pre>list(object({<br>    id                                   = string,<br>    ignore_missing_vnet_service_endpoint = bool<br>  }))</pre> | `null` | no |
 
 ## Outputs
 

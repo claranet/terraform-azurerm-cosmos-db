@@ -84,7 +84,7 @@ variable "is_virtual_network_filter_enabled" {
 }
 
 variable "virtual_network_rule" {
-  description = "Specifues a virtual_network_rules resource used to define which subnets are allowed to access this CosmosDB account"
+  description = "Specifies a virtual_network_rules resource used to define which subnets are allowed to access this CosmosDB account"
   type = list(object({
     id                                   = string,
     ignore_missing_vnet_service_endpoint = bool
@@ -111,8 +111,12 @@ variable "consistency_policy_max_staleness_prefix" {
 }
 
 variable "backup" {
-  type        = map(string)
   description = "Backup block with type (Continuous / Periodic), interval_in_minutes and retention_in_hours keys"
+  type = object({
+    type                = string
+    interval_in_minutes = number
+    retention_in_hours  = number
+  })
   default = {
     type                = "Periodic"
     interval_in_minutes = 3 * 60
