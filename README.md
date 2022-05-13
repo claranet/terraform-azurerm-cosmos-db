@@ -109,20 +109,21 @@ module "cosmosdb" {
 | analytical\_storage\_type | The schema type of the Analytical Storage for this Cosmos DB account. Possible values are `FullFidelity` and `WellDefined`. | `string` | `null` | no |
 | backup | Backup block with type (Continuous / Periodic), interval\_in\_minutes and retention\_in\_hours keys | <pre>object({<br>    type                = string<br>    interval_in_minutes = number<br>    retention_in_hours  = number<br>  })</pre> | <pre>{<br>  "interval_in_minutes": 180,<br>  "retention_in_hours": 168,<br>  "type": "Periodic"<br>}</pre> | no |
 | capabilities | Configures the capabilities to enable for this Cosmos DB account:<br>Possible values are<br>  AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses,<br>  EnableAggregationPipeline, EnableCassandra, EnableGremlin,EnableMongo, EnableTable, EnableServerless,<br>  MongoDBv3.4 and mongoEnableDocLevelTTL. | `list(string)` | `[]` | no |
-| client\_name | Name of client | `string` | n/a | yes |
+| client\_name | Client name | `string` | n/a | yes |
 | consistency\_policy\_level | Consistency policy level. Allowed values are `BoundedStaleness`, `Eventual`, `Session`, `Strong` or `ConsistentPrefix` | `string` | `"BoundedStaleness"` | no |
 | consistency\_policy\_max\_interval\_in\_seconds | When used with the Bounded Staleness consistency level, this value represents the time amount of staleness (in seconds) tolerated. Accepted range for this value is 5 - 86400 (1 day). Defaults to 5. Required when consistency\_level is set to BoundedStaleness. | `number` | `10` | no |
 | consistency\_policy\_max\_staleness\_prefix | When used with the Bounded Staleness consistency level, this value represents the number of stale requests tolerated. Accepted range for this value is 10 – 2147483647. Defaults to 100. Required when consistency\_level is set to BoundedStaleness. | `number` | `200` | no |
 | custom\_diagnostic\_settings\_name | Custom name of the diagnostics settings, name will be 'default' if not set. | `string` | `"default"` | no |
 | custom\_server\_name | Custom Server Name identifier | `string` | `""` | no |
 | default\_tags\_enabled | Option to enable or disable default tags. | `bool` | `true` | no |
-| environment | Name of application's environnement | `string` | n/a | yes |
+| environment | Environment name | `string` | n/a | yes |
 | extra\_tags | Map of custom tags. | `map(string)` | `{}` | no |
 | failover\_locations | The name of the Azure region to host replicated data and their priority. | `map(map(string))` | `null` | no |
+| identity\_type | CosmosDB identity type. Possible values for type are: `null` and `SystemAssigned`. | `string` | `"SystemAssigned"` | no |
 | is\_virtual\_network\_filter\_enabled | Enables virtual network filtering for this Cosmos DB account | `bool` | `false` | no |
 | kind | Specifies the Kind of CosmosDB to create - possible values are `GlobalDocumentDB` and `MongoDB`. | `string` | `"GlobalDocumentDB"` | no |
-| location | Azure region to use | `string` | n/a | yes |
-| location\_short | Short string for Azure location/region | `string` | n/a | yes |
+| location | Azure location for CosmosDB. | `string` | n/a | yes |
+| location\_short | Short string for Azure location. | `string` | n/a | yes |
 | logs\_categories | Log categories to send to destinations. | `list(string)` | `null` | no |
 | logs\_destinations\_ids | List of destination resources Ids for logs diagnostics destination. Can be Storage Account, Log Analytics Workspace and Event Hub. No more than one of each can be set. Empty list to disable logging. | `list(string)` | n/a | yes |
 | logs\_metrics\_categories | Metrics categories to send to destinations. | `list(string)` | `null` | no |
@@ -130,11 +131,15 @@ module "cosmosdb" {
 | mongo\_server\_version | The Server Version of a MongoDB account. Possible values are `4.0`, `3.6`, and `3.2`. | `string` | `"4.0"` | no |
 | name\_prefix | Optional prefix for the generated name | `string` | `""` | no |
 | name\_suffix | Optional suffix for the generated name | `string` | `""` | no |
+| network\_acl\_bypass\_for\_azure\_services | If azure services can bypass ACLs. | `bool` | `false` | no |
+| network\_acl\_bypass\_ids | The list of resource Ids for Network Acl Bypass for this Cosmos DB account. | `list(string)` | `null` | no |
 | offer\_type | Specifies the Offer Type to use for this CosmosDB Account - currently this can only be set to Standard. | `string` | `"Standard"` | no |
-| resource\_group\_name | Name of the application ressource group, herited from infra module | `string` | n/a | yes |
-| stack | Name of application stack | `string` | n/a | yes |
+| public\_network\_access\_enabled | Whether or not public network access is allowed for this CosmosDB account. | `bool` | `true` | no |
+| resource\_group\_name | Resource Group the resources will belong to | `string` | n/a | yes |
+| stack | Stack name | `string` | n/a | yes |
 | use\_caf\_naming | Use the Azure CAF naming provider to generate default resource name. `custom_server_name` override this if set. Legacy default name is used if this is set to `false`. | `bool` | `true` | no |
 | virtual\_network\_rule | Specifies a virtual\_network\_rules resource used to define which subnets are allowed to access this CosmosDB account | <pre>list(object({<br>    id                                   = string,<br>    ignore_missing_vnet_service_endpoint = bool<br>  }))</pre> | `null` | no |
+| zone\_redundancy\_enabled | True to enabled zone redundancy on default primary location | `bool` | `true` | no |
 
 ## Outputs
 
@@ -150,6 +155,7 @@ module "cosmosdb" {
 | cosmosdb\_secondary\_master\_key | The Secondary master key for the CosmosDB Account. |
 | cosmosdb\_secondary\_readonly\_master\_key | The Secondary read-only master key for the CosmosDB Account. |
 | cosmosdb\_write\_endpoints | A list of write endpoints available for this CosmosDB account. |
+| identity | Identity block with principal ID |
 <!-- END_TF_DOCS -->
 ## Related documentation
 

@@ -52,3 +52,8 @@ output "cosmosdb_connection_strings" {
   value       = azurerm_cosmosdb_account.db.connection_strings
   sensitive   = true
 }
+
+output "identity" {
+  description = "Identity block with principal ID"
+  value       = azurerm_cosmosdb_account.db.identity
+}

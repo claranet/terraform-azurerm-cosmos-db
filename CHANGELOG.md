@@ -1,3 +1,12 @@
+# Unreleased
+
+Added
+  * AZ-740: Additional variables
+
+Changed
+  * AZ-740: System assigned identity configured by default
+  * AZ-740: Zone redundancy enabled by default
+
 # v6.0.0 - 2022-05-11
 
 Breaking

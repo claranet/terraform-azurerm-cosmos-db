@@ -1,30 +1,30 @@
 variable "client_name" {
-  description = "Name of client"
+  description = "Client name"
   type        = string
 }
 
 variable "environment" {
-  description = "Name of application's environnement"
+  description = "Environment name"
   type        = string
 }
 
 variable "stack" {
-  description = "Name of application stack"
+  description = "Stack name"
   type        = string
 }
 
 variable "resource_group_name" {
-  description = "Name of the application ressource group, herited from infra module"
+  description = "Resource Group the resources will belong to"
   type        = string
 }
 
 variable "location" {
-  description = "Azure region to use"
+  description = "Azure location for CosmosDB."
   type        = string
 }
 
 variable "location_short" {
-  description = "Short string for Azure location/region"
+  description = "Short string for Azure location."
   type        = string
 }
 
@@ -53,9 +53,15 @@ variable "mongo_server_version" {
   }
 }
 
+variable "zone_redundancy_enabled" {
+  description = "True to enabled zone redundancy on default primary location"
+  type        = bool
+  default     = true
+}
+
 variable "failover_locations" {
-  type        = map(map(string))
   description = "The name of the Azure region to host replicated data and their priority."
+  type        = map(map(string))
   default     = null
 }
 
@@ -77,10 +83,28 @@ variable "allowed_cidrs" {
   default     = []
 }
 
+variable "public_network_access_enabled" {
+  description = "Whether or not public network access is allowed for this CosmosDB account."
+  type        = bool
+  default     = true
+}
+
 variable "is_virtual_network_filter_enabled" {
   description = "Enables virtual network filtering for this Cosmos DB account"
   type        = bool
   default     = false
+}
+
+variable "network_acl_bypass_for_azure_services" {
+  description = "If azure services can bypass ACLs."
+  type        = bool
+  default     = false
+}
+
+variable "network_acl_bypass_ids" {
+  description = "The list of resource Ids for Network Acl Bypass for this Cosmos DB account."
+  type        = list(string)
+  default     = null
 }
 
 variable "virtual_network_rule" {
@@ -139,4 +163,10 @@ variable "analytical_storage_type" {
     condition     = try(contains(["FullFidelity", "WellDefined"], var.analytical_storage_type), true)
     error_message = "The `analytical_storage_type` value must be valid. Possible values are `FullFidelity` and `WellDefined`."
   }
+}
+
+variable "identity_type" {
+  description = "CosmosDB identity type. Possible values for type are: `null` and `SystemAssigned`."
+  type        = string
+  default     = "SystemAssigned"
 }
