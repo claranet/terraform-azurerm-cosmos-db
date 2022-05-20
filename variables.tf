@@ -43,14 +43,9 @@ variable "kind" {
 }
 
 variable "mongo_server_version" {
-  description = "The Server Version of a MongoDB account. Possible values are `4.0`, `3.6`, and `3.2`."
+  description = "The Server Version of a MongoDB account. See possible values https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cosmosdb_account#mongo_server_version"
   type        = string
-  default     = "4.0"
-
-  validation {
-    condition     = contains(["3.2", "3.6", "4.0"], var.mongo_server_version)
-    error_message = "The `mongo_server_version` value must be a valid version. Possible values are `4.0`, `3.6`, and `3.2`."
-  }
+  default     = "4.2"
 }
 
 variable "zone_redundancy_enabled" {
