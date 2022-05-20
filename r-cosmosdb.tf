@@ -43,7 +43,10 @@ resource "azurerm_cosmosdb_account" "db" {
 
   ip_range_filter = join(",", var.allowed_cidrs)
 
-  is_virtual_network_filter_enabled = var.is_virtual_network_filter_enabled
+  public_network_access_enabled         = var.public_network_access_enabled
+  is_virtual_network_filter_enabled     = var.is_virtual_network_filter_enabled
+  network_acl_bypass_for_azure_services = var.network_acl_bypass_for_azure_services
+  network_acl_bypass_ids                = var.network_acl_bypass_ids
 
   dynamic "virtual_network_rule" {
     for_each = var.virtual_network_rule != null ? toset(var.virtual_network_rule) : []
@@ -54,11 +57,18 @@ resource "azurerm_cosmosdb_account" "db" {
   }
 
   dynamic "backup" {
-    for_each = var.backup != null ? ["_"] : []
+    for_each = var.backup != null ? ["enabled"] : []
     content {
       type                = lookup(var.backup, "type", null)
       interval_in_minutes = lookup(var.backup, "interval_in_minutes", null)
       retention_in_hours  = lookup(var.backup, "retention_in_hours", null)
+    }
+  }
+
+  dynamic "identity" {
+    for_each = var.identity_type != null ? ["enabled"] : []
+    content {
+      type = var.identity_type
     }
   }
 
