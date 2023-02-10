@@ -157,6 +157,7 @@ module "cosmosdb" {
 | cosmosdb\_secondary\_readonly\_master\_key | The Secondary read-only master key for the CosmosDB Account. |
 | cosmosdb\_write\_endpoints | A list of write endpoints available for this CosmosDB account. |
 | identity | Identity block with principal ID |
+| resource\_group\_name | Resource group name |
 <!-- END_TF_DOCS -->
 ## Related documentation
 
