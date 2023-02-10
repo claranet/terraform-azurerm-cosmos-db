@@ -57,3 +57,8 @@ output "identity" {
   description = "Identity block with principal ID"
   value       = azurerm_cosmosdb_account.db.identity
 }
+
+output "resource_group_name" {
+  description = "Resource group name"
+  value       = var.resource_group_name
+}
