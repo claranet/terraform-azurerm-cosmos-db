@@ -1,4 +1,4 @@
-# Unreleased
+# v6.3.0 - 2023-02-10
 
 Added
   * AZ-999: Add resource group name output
