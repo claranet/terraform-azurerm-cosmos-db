@@ -166,7 +166,7 @@ variable "identity_type" {
   default     = "SystemAssigned"
 }
 
-variable "enable_free_tier" {
+variable "free_tier_enabled" {
   description = "Enable the option to opt-in for the free database account within subscription."
   type        = bool
   default     = false

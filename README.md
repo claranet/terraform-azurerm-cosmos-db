@@ -124,10 +124,10 @@ module "cosmosdb" {
 | custom\_diagnostic\_settings\_name | Custom name of the diagnostics settings, name will be 'default' if not set. | `string` | `"default"` | no |
 | custom\_server\_name | Custom Server Name identifier | `string` | `""` | no |
 | default\_tags\_enabled | Option to enable or disable default tags. | `bool` | `true` | no |
-| enable\_free\_tier | Enable the option to opt-in for the free database account within subscription. | `bool` | `false` | no |
 | environment | Environment name | `string` | n/a | yes |
 | extra\_tags | Map of custom tags. | `map(string)` | `{}` | no |
 | failover\_locations | The name of the Azure region to host replicated data and their priority. | `map(map(string))` | `null` | no |
+| free\_tier\_enabled | Enable the option to opt-in for the free database account within subscription. | `bool` | `false` | no |
 | identity\_type | CosmosDB identity type. Possible values for type are: `null` and `SystemAssigned`. | `string` | `"SystemAssigned"` | no |
 | is\_virtual\_network\_filter\_enabled | Enables virtual network filtering for this Cosmos DB account | `bool` | `false` | no |
 | kind | Specifies the Kind of CosmosDB to create - possible values are `GlobalDocumentDB` and `MongoDB`. | `string` | `"GlobalDocumentDB"` | no |
