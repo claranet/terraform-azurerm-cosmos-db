@@ -1,8 +1,13 @@
+# Unreleased
+
+Added
+  * [GH-5](https://github.com/claranet/terraform-azurerm-cosmos-db/pull/5): Add variable for free tier option
+
 # v6.3.0 - 2023-02-10
 
 Added
   * AZ-999: Add resource group name output
-  
+
 # v6.2.0 - 2022-11-23
 
 Changed
