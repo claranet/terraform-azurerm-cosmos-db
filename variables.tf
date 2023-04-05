@@ -165,7 +165,7 @@ variable "identity_type" {
   type        = string
   default     = "SystemAssigned"
 }
-  
+
 variable "enable_free_tier" {
   description = "Enable the option to opt-in for the free database account within subscription."
   type        = bool

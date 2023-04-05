@@ -7,6 +7,7 @@ resource "azurerm_cosmosdb_account" "db" {
   offer_type           = var.offer_type
   kind                 = var.kind
   mongo_server_version = var.kind == "MongoDB" ? var.mongo_server_version : null
+  enable_free_tier     = var.enable_free_tier
 
   enable_automatic_failover = true
 
