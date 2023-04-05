@@ -1,4 +1,4 @@
-# Unreleased
+# v6.4.0 - 2023-04-05
 
 Added
   * [GH-5](https://github.com/claranet/terraform-azurerm-cosmos-db/pull/5): Add variable for free tier option
