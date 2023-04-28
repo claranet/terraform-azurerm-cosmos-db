@@ -99,7 +99,7 @@ module "cosmosdb" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| diagnostics | claranet/diagnostic-settings/azurerm | 6.2.0 |
+| diagnostics | claranet/diagnostic-settings/azurerm | ~> 6.4.1 |
 
 ## Resources
 
