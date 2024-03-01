@@ -54,6 +54,7 @@ module "cosmosdb" {
     type                = "Periodic"
     interval_in_minutes = 60 * 3 # 3 hours
     retention_in_hours  = 24
+    storage_redundancy  = "Zone"
   }
 
   extra_tags = {

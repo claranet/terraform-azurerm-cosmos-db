@@ -63,6 +63,7 @@ resource "azurerm_cosmosdb_account" "db" {
       type                = lookup(var.backup, "type", null)
       interval_in_minutes = lookup(var.backup, "interval_in_minutes", null)
       retention_in_hours  = lookup(var.backup, "retention_in_hours", null)
+      storage_redundancy  = lookup(var.backup, "storage_redundancy", null)
     }
   }
 
