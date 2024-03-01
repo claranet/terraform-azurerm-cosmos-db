@@ -1,3 +1,8 @@
+# Unreleased
+
+Added
+  * AZ-1350: Add `storage_redundancy` parameter to backup
+
 # v6.5.0 - 2023-09-22
 
 Breaking
