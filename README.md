@@ -116,8 +116,8 @@ module "cosmosdb" {
 | allowed\_cidrs | CosmosDB Firewall Support: This value specifies the set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IP's for a given database account. | `list(string)` | `[]` | no |
 | analytical\_storage\_enabled | Enable Analytical Storage option for this Cosmos DB account. Defaults to `false`. Changing this forces a new resource to be created. | `bool` | `false` | no |
 | analytical\_storage\_type | The schema type of the Analytical Storage for this Cosmos DB account. Possible values are `FullFidelity` and `WellDefined`. | `string` | `null` | no |
-| backup | Backup block with type (Continuous / Periodic), interval\_in\_minutes, retention\_in\_hours keys and storage\_redundancy | <pre>object({<br>    type                = string<br>    interval_in_minutes = number<br>    retention_in_hours  = number<br>    storage_redundancy  = string<br>  })</pre> | <pre>{<br>  "interval_in_minutes": 180,<br>  "retention_in_hours": 168,<br>  "storage_redundancy": "Geo",<br>  "type": "Periodic"<br>}</pre> | no |
-| capabilities | Configures the capabilities to enable for this Cosmos DB account:<br>Possible values are<br>  AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses,<br>  EnableAggregationPipeline, EnableCassandra, EnableGremlin,EnableMongo, EnableTable, EnableServerless,<br>  MongoDBv3.4 and mongoEnableDocLevelTTL. | `list(string)` | `[]` | no |
+| backup | Backup block with type (Continuous / Periodic), interval\_in\_minutes, retention\_in\_hours keys and storage\_redundancy | <pre>object({<br/>    type                = string<br/>    interval_in_minutes = number<br/>    retention_in_hours  = number<br/>    storage_redundancy  = string<br/>  })</pre> | <pre>{<br/>  "interval_in_minutes": 180,<br/>  "retention_in_hours": 168,<br/>  "storage_redundancy": "Geo",<br/>  "type": "Periodic"<br/>}</pre> | no |
+| capabilities | Configures the capabilities to enable for this Cosmos DB account:<br/>Possible values are<br/>  AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses,<br/>  EnableAggregationPipeline, EnableCassandra, EnableGremlin,EnableMongo, EnableTable, EnableServerless,<br/>  MongoDBv3.4 and mongoEnableDocLevelTTL. | `list(string)` | `[]` | no |
 | client\_name | Client name | `string` | n/a | yes |
 | consistency\_policy\_level | Consistency policy level. Allowed values are `BoundedStaleness`, `Eventual`, `Session`, `Strong` or `ConsistentPrefix` | `string` | `"BoundedStaleness"` | no |
 | consistency\_policy\_max\_interval\_in\_seconds | When used with the Bounded Staleness consistency level, this value represents the time amount of staleness (in seconds) tolerated. Accepted range for this value is 5 - 86400 (1 day). Defaults to 5. Required when consistency\_level is set to BoundedStaleness. | `number` | `10` | no |
@@ -135,7 +135,7 @@ module "cosmosdb" {
 | location | Azure location for CosmosDB. | `string` | n/a | yes |
 | location\_short | Short string for Azure location. | `string` | n/a | yes |
 | logs\_categories | Log categories to send to destinations. | `list(string)` | `null` | no |
-| logs\_destinations\_ids | List of destination resources IDs for logs diagnostic destination.<br>Can be `Storage Account`, `Log Analytics Workspace` and `Event Hub`. No more than one of each can be set.<br>If you want to specify an Azure EventHub to send logs and metrics to, you need to provide a formated string with both the EventHub Namespace authorization send ID and the EventHub name (name of the queue to use in the Namespace) separated by the `|` character. | `list(string)` | n/a | yes |
+| logs\_destinations\_ids | List of destination resources IDs for logs diagnostic destination.<br/>Can be `Storage Account`, `Log Analytics Workspace` and `Event Hub`. No more than one of each can be set.<br/>If you want to specify an Azure EventHub to send logs and metrics to, you need to provide a formated string with both the EventHub Namespace authorization send ID and the EventHub name (name of the queue to use in the Namespace) separated by the `|` character. | `list(string)` | n/a | yes |
 | logs\_metrics\_categories | Metrics categories to send to destinations. | `list(string)` | `null` | no |
 | mongo\_server\_version | The Server Version of a MongoDB account. See possible values https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cosmosdb_account#mongo_server_version | `string` | `"4.2"` | no |
 | name\_prefix | Optional prefix for the generated name | `string` | `""` | no |
@@ -147,7 +147,7 @@ module "cosmosdb" {
 | resource\_group\_name | Resource Group the resources will belong to | `string` | n/a | yes |
 | stack | Stack name | `string` | n/a | yes |
 | use\_caf\_naming | Use the Azure CAF naming provider to generate default resource name. `custom_server_name` override this if set. Legacy default name is used if this is set to `false`. | `bool` | `true` | no |
-| virtual\_network\_rule | Specifies a virtual\_network\_rules resource used to define which subnets are allowed to access this CosmosDB account | <pre>list(object({<br>    id                                   = string,<br>    ignore_missing_vnet_service_endpoint = bool<br>  }))</pre> | `null` | no |
+| virtual\_network\_rule | Specifies a virtual\_network\_rules resource used to define which subnets are allowed to access this CosmosDB account | <pre>list(object({<br/>    id                                   = string,<br/>    ignore_missing_vnet_service_endpoint = bool<br/>  }))</pre> | `null` | no |
 | zone\_redundancy\_enabled | True to enabled zone redundancy on default primary location | `bool` | `true` | no |
 
 ## Outputs
