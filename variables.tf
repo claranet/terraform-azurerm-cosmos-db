@@ -130,12 +130,13 @@ variable "consistency_policy_max_staleness_prefix" {
 }
 
 variable "backup" {
-  description = "Backup block with type (Continuous / Periodic), interval_in_minutes, retention_in_hours keys and storage_redundancy"
+  description = "Backup block with type (Continuous / Periodic), tier (Continuous7Days / Continuous30Days), interval_in_minutes, retention_in_hours keys and storage_redundancy"
   type = object({
     type                = string
-    interval_in_minutes = number
-    retention_in_hours  = number
-    storage_redundancy  = string
+    tier                = optional(string)
+    interval_in_minutes = optional(number)
+    retention_in_hours  = optional(number)
+    storage_redundancy  = optional(string)
   })
   default = {
     type                = "Periodic"
