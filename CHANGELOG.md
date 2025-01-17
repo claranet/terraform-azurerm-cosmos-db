@@ -1,3 +1,13 @@
+## 7.0.0 (2025-01-17)
+
+### ⚠ BREAKING CHANGES
+
+* bump module to v7, minimum TF version 1.3+
+
+### Features
+
+* bump module to v7, minimum TF version 1.3+ 0e352a8
+
 ## 6.8.0 (2025-01-17)
 
 ### Features
