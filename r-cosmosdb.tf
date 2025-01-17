@@ -1,5 +1,5 @@
-resource "azurerm_cosmosdb_account" "db" {
-  name = local.cosmosdb_name
+resource "azurerm_cosmosdb_account" "main" {
+  name = local.name
 
   location            = var.location
   resource_group_name = var.resource_group_name
@@ -7,9 +7,9 @@ resource "azurerm_cosmosdb_account" "db" {
   offer_type           = var.offer_type
   kind                 = var.kind
   mongo_server_version = var.kind == "MongoDB" ? var.mongo_server_version : null
-  enable_free_tier     = var.free_tier_enabled
+  free_tier_enabled    = var.free_tier_enabled
 
-  enable_automatic_failover = true
+  automatic_failover_enabled = true
 
   analytical_storage_enabled = var.analytical_storage_enabled
 
@@ -42,7 +42,7 @@ resource "azurerm_cosmosdb_account" "db" {
     }
   }
 
-  ip_range_filter = join(",", var.allowed_cidrs)
+  ip_range_filter = var.allowed_cidrs
 
   public_network_access_enabled         = var.public_network_access_enabled
   is_virtual_network_filter_enabled     = var.is_virtual_network_filter_enabled
@@ -76,4 +76,9 @@ resource "azurerm_cosmosdb_account" "db" {
   }
 
   tags = merge(local.default_tags, var.extra_tags)
+}
+
+moved {
+  from = azurerm_cosmosdb_account.db
+  to   = azurerm_cosmosdb_account.main
 }
