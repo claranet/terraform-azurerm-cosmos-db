@@ -1,3 +1,35 @@
+## 6.8.0 (2025-01-17)
+
+### Features
+
+* **AZ-1494:** add tier for continuous backup 7133a4c
+
+### Miscellaneous Chores
+
+* **deps:** update dependency opentofu to v1.8.3 e032409
+* **deps:** update dependency opentofu to v1.8.4 0716914
+* **deps:** update dependency opentofu to v1.8.6 7a43076
+* **deps:** update dependency opentofu to v1.8.8 576a214
+* **deps:** update dependency opentofu to v1.9.0 cfe0bff
+* **deps:** update dependency pre-commit to v4 a4e90da
+* **deps:** update dependency pre-commit to v4.0.1 7b61c91
+* **deps:** update dependency tflint to v0.54.0 706d2b4
+* **deps:** update dependency tflint to v0.55.0 c418262
+* **deps:** update dependency trivy to v0.56.1 25aec00
+* **deps:** update dependency trivy to v0.56.2 8fdd461
+* **deps:** update dependency trivy to v0.57.1 1cf6c65
+* **deps:** update dependency trivy to v0.58.1 be5ae74
+* **deps:** update dependency trivy to v0.58.2 05f4388
+* **deps:** update pre-commit hook alessandrojcm/commitlint-pre-commit-hook to v9.19.0 1d48a34
+* **deps:** update pre-commit hook alessandrojcm/commitlint-pre-commit-hook to v9.20.0 709be16
+* **deps:** update pre-commit hook pre-commit/pre-commit-hooks to v5 c328130
+* **deps:** update pre-commit hook tofuutils/pre-commit-opentofu to v2.1.0 acab93d
+* **deps:** update tools 52558fd
+* **deps:** update tools cab6185
+* prepare for new examples structure 3f18833
+* update examples structure 7045ce6
+* update tflint config for v0.55.0 6b7169b
+
 ## 6.7.0 (2024-10-03)
 
 ### Features
