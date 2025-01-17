@@ -35,35 +35,6 @@ More details about variables set by the `terraform-wrapper` available in the [do
 [Hashicorp Terraform](https://github.com/hashicorp/terraform/). Instead, we recommend to use [OpenTofu](https://github.com/opentofu/opentofu/).
 
 ```hcl
-module "azure_region" {
-  source  = "claranet/regions/azurerm"
-  version = "x.x.x"
-
-  azure_region = var.azure_region
-}
-
-module "rg" {
-  source  = "claranet/rg/azurerm"
-  version = "x.x.x"
-
-  location    = module.azure_region.location
-  client_name = var.client_name
-  environment = var.environment
-  stack       = var.stack
-}
-
-module "logs" {
-  source  = "claranet/run/azurerm//modules/logs"
-  version = "x.x.x"
-
-  client_name         = var.client_name
-  environment         = var.environment
-  stack               = var.stack
-  location            = module.azure_region.location
-  location_short      = module.azure_region.location_short
-  resource_group_name = module.rg.resource_group_name
-}
-
 module "cosmosdb" {
   source  = "claranet/cosmos-db/azurerm"
   version = "x.x.x"
@@ -74,9 +45,12 @@ module "cosmosdb" {
   client_name    = var.client_name
   stack          = var.stack
 
-  resource_group_name = module.rg.resource_group_name
+  resource_group_name = module.rg.name
 
-  logs_destinations_ids = [module.logs.log_analytics_workspace_id]
+  logs_destinations_ids = [
+    module.run.logs_storage_account_id,
+    module.run.log_analytics_workspace_id,
+  ]
 
   backup = {
     type                = "Periodic"
