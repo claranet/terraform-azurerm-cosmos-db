@@ -46,7 +46,7 @@ resource "azurerm_cosmosdb_account" "main" {
 
   public_network_access_enabled         = var.public_network_access_enabled
   is_virtual_network_filter_enabled     = var.is_virtual_network_filter_enabled
-  network_acl_bypass_for_azure_services = var.network_acl_bypass_for_azure_services
+  network_acl_bypass_for_azure_services = var.network_acl_bypass_for_azure_services_enabled
   network_acl_bypass_ids                = var.network_acl_bypass_ids
 
   dynamic "virtual_network_rule" {
@@ -69,9 +69,11 @@ resource "azurerm_cosmosdb_account" "main" {
   }
 
   dynamic "identity" {
-    for_each = var.identity_type != null ? ["enabled"] : []
+    for_each = var.identity_type != null ? ["identity"] : []
     content {
       type = var.identity_type
+      # Avoid perpetual changes if SystemAssigned and identity_ids is not null
+      identity_ids = var.identity_type == "UserAssigned" ? var.identity_ids : null
     }
   }
 

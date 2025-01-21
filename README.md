@@ -94,12 +94,12 @@ module "cosmosdb" {
 | allowed\_cidrs | CosmosDB Firewall Support: This value specifies the set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IP's for a given database account. | `list(string)` | `[]` | no |
 | analytical\_storage\_enabled | Enable Analytical Storage option for this Cosmos DB account. Defaults to `false`. Changing this forces a new resource to be created. | `bool` | `false` | no |
 | analytical\_storage\_type | The schema type of the Analytical Storage for this Cosmos DB account. Possible values are `FullFidelity` and `WellDefined`. | `string` | `null` | no |
-| backup | Backup block with type (Continuous / Periodic), tier (Continuous7Days / Continuous30Days), interval\_in\_minutes, retention\_in\_hours keys and storage\_redundancy. | <pre>object({<br/>    type                = string<br/>    tier                = optional(string)<br/>    interval_in_minutes = optional(number)<br/>    retention_in_hours  = optional(number)<br/>    storage_redundancy  = optional(string)<br/>  })</pre> | <pre>{<br/>  "interval_in_minutes": 180,<br/>  "retention_in_hours": 168,<br/>  "storage_redundancy": "Geo",<br/>  "type": "Periodic"<br/>}</pre> | no |
+| backup | Backup block with `type` (`Continuous` or `Periodic`), `tier` (`Continuous7Days` or `Continuous30Days`), `interval_in_minutes`, `retention_in_hours` and `storage_redundancy`. | <pre>object({<br/>    type                = string<br/>    tier                = optional(string)<br/>    interval_in_minutes = optional(number)<br/>    retention_in_hours  = optional(number)<br/>    storage_redundancy  = optional(string)<br/>  })</pre> | <pre>{<br/>  "interval_in_minutes": 180,<br/>  "retention_in_hours": 168,<br/>  "storage_redundancy": "Geo",<br/>  "type": "Periodic"<br/>}</pre> | no |
 | capabilities | Configures the capabilities to enable for this Cosmos DB account:<br/>Possible values are<br/>  AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses,<br/>  EnableAggregationPipeline, EnableCassandra, EnableGremlin,EnableMongo, EnableTable, EnableServerless,<br/>  MongoDBv3.4 and mongoEnableDocLevelTTL. | `list(string)` | `[]` | no |
 | client\_name | Client name. | `string` | n/a | yes |
 | consistency\_policy\_level | Consistency policy level. Allowed values are `BoundedStaleness`, `Eventual`, `Session`, `Strong` or `ConsistentPrefix`. | `string` | `"BoundedStaleness"` | no |
-| consistency\_policy\_max\_interval\_in\_seconds | When used with the Bounded Staleness consistency level, this value represents the time amount of staleness (in seconds) tolerated. Accepted range for this value is 5 - 86400 (1 day). Defaults to 5. Required when consistency\_level is set to BoundedStaleness. | `number` | `10` | no |
-| consistency\_policy\_max\_staleness\_prefix | When used with the Bounded Staleness consistency level, this value represents the number of stale requests tolerated. Accepted range for this value is 10 – 2147483647. Defaults to 100. Required when consistency\_level is set to BoundedStaleness. | `number` | `200` | no |
+| consistency\_policy\_max\_interval\_in\_seconds | When used with the Bounded Staleness consistency level, this value represents the time amount of staleness (in seconds) tolerated. Accepted range for this value is 5 - 86400 (1 day). Defaults to 10. Required when consistency\_level is set to BoundedStaleness. | `number` | `10` | no |
+| consistency\_policy\_max\_staleness\_prefix | When used with the Bounded Staleness consistency level, this value represents the number of stale requests tolerated. Accepted range for this value is 10 – 2147483647. Defaults to 200. Required when `consistency_level` is set to `BoundedStaleness`. | `number` | `200` | no |
 | custom\_name | Custom CosmosDB Server Name identifier. | `string` | `""` | no |
 | default\_tags\_enabled | Option to enable or disable default tags. | `bool` | `true` | no |
 | diagnostic\_settings\_custom\_name | Custom name of the diagnostics settings, name will be `default` if not set. | `string` | `"default"` | no |
@@ -107,7 +107,8 @@ module "cosmosdb" {
 | extra\_tags | Map of custom tags. | `map(string)` | `{}` | no |
 | failover\_locations | The name of the Azure region to host replicated data and their priority. | `map(map(string))` | `null` | no |
 | free\_tier\_enabled | Enable the option to opt-in for the free database account within subscription. | `bool` | `false` | no |
-| identity\_type | CosmosDB identity type. Possible values for type are: `null` and `SystemAssigned`. | `string` | `"SystemAssigned"` | no |
+| identity\_ids | User Assigned Identities IDs to add to Function App. Mandatory if `var.identity_type` contains `UserAssigned`. | `list(string)` | `null` | no |
+| identity\_type | CosmosDB identity type. Possible values for type are: `null`, `SystemAssigned`, `SystemAssigned, UserAssigned`. | `string` | `"SystemAssigned"` | no |
 | is\_virtual\_network\_filter\_enabled | Enables virtual network filtering for this Cosmos DB account. | `bool` | `false` | no |
 | kind | Specifies the Kind of CosmosDB to create - possible values are `GlobalDocumentDB` and `MongoDB`. | `string` | `"GlobalDocumentDB"` | no |
 | location | Azure location for CosmosDB. | `string` | n/a | yes |
@@ -115,16 +116,16 @@ module "cosmosdb" {
 | logs\_categories | Log categories to send to destinations. | `list(string)` | `null` | no |
 | logs\_destinations\_ids | List of destination resources IDs for logs diagnostic destination.<br/>Can be `Storage Account`, `Log Analytics Workspace` and `Event Hub`. No more than one of each can be set.<br/>If you want to use Azure EventHub as a destination, you must provide a formatted string containing both the EventHub Namespace authorization send ID and the EventHub name (name of the queue to use in the Namespace) separated by the <code>&#124;</code> character. | `list(string)` | n/a | yes |
 | logs\_metrics\_categories | Metrics categories to send to destinations. | `list(string)` | `null` | no |
-| mongo\_server\_version | The Server Version of a MongoDB account. See [possible values](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cosmosdb_account#mongo_server_version) | `string` | `"7.0"` | no |
+| mongo\_server\_version | The Server Version of a MongoDB account. See [possible values](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cosmosdb_account#mongo_server_version). | `string` | `"7.0"` | no |
 | name\_prefix | Optional prefix for the generated name. | `string` | `""` | no |
 | name\_suffix | Optional suffix for the generated name. | `string` | `""` | no |
-| network\_acl\_bypass\_for\_azure\_services | If azure services can bypass ACLs. | `bool` | `false` | no |
+| network\_acl\_bypass\_for\_azure\_services\_enabled | Whether to allow azure services to bypass ACLs. | `bool` | `false` | no |
 | network\_acl\_bypass\_ids | The list of resource Ids for Network Acl Bypass for this Cosmos DB account. | `list(string)` | `null` | no |
 | offer\_type | Specifies the Offer Type to use for this CosmosDB Account - currently this can only be set to Standard. | `string` | `"Standard"` | no |
-| public\_network\_access\_enabled | Whether or not public network access is allowed for this CosmosDB account. | `bool` | `true` | no |
+| public\_network\_access\_enabled | Whether or not public network access is allowed for this CosmosDB account. | `bool` | `false` | no |
 | resource\_group\_name | Resource Group the resources will belong to. | `string` | n/a | yes |
 | stack | Stack name. | `string` | n/a | yes |
-| virtual\_network\_rule | Specifies a virtual\_network\_rules resource used to define which subnets are allowed to access this CosmosDB account. | <pre>list(object({<br/>    id                                   = string,<br/>    ignore_missing_vnet_service_endpoint = bool<br/>  }))</pre> | `null` | no |
+| virtual\_network\_rule | Specifies a `virtual_network_rules` resource used to define which subnets are allowed to access this CosmosDB account. | <pre>list(object({<br/>    id                                   = string,<br/>    ignore_missing_vnet_service_endpoint = bool<br/>  }))</pre> | `null` | no |
 | zone\_redundancy\_enabled | True to enabled zone redundancy on default primary location. | `bool` | `true` | no |
 
 ## Outputs

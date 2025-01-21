@@ -13,7 +13,7 @@ variable "kind" {
 }
 
 variable "mongo_server_version" {
-  description = "The Server Version of a MongoDB account. See [possible values](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cosmosdb_account#mongo_server_version)"
+  description = "The Server Version of a MongoDB account. See [possible values](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cosmosdb_account#mongo_server_version)."
   type        = string
   default     = "7.0"
 }
@@ -51,7 +51,7 @@ variable "allowed_cidrs" {
 variable "public_network_access_enabled" {
   description = "Whether or not public network access is allowed for this CosmosDB account."
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "is_virtual_network_filter_enabled" {
@@ -60,8 +60,8 @@ variable "is_virtual_network_filter_enabled" {
   default     = false
 }
 
-variable "network_acl_bypass_for_azure_services" {
-  description = "If azure services can bypass ACLs."
+variable "network_acl_bypass_for_azure_services_enabled" {
+  description = "Whether to allow azure services to bypass ACLs."
   type        = bool
   default     = false
 }
@@ -73,7 +73,7 @@ variable "network_acl_bypass_ids" {
 }
 
 variable "virtual_network_rule" {
-  description = "Specifies a virtual_network_rules resource used to define which subnets are allowed to access this CosmosDB account."
+  description = "Specifies a `virtual_network_rules` resource used to define which subnets are allowed to access this CosmosDB account."
   type = list(object({
     id                                   = string,
     ignore_missing_vnet_service_endpoint = bool
@@ -88,19 +88,19 @@ variable "consistency_policy_level" {
 }
 
 variable "consistency_policy_max_interval_in_seconds" {
-  description = "When used with the Bounded Staleness consistency level, this value represents the time amount of staleness (in seconds) tolerated. Accepted range for this value is 5 - 86400 (1 day). Defaults to 5. Required when consistency_level is set to BoundedStaleness."
+  description = "When used with the Bounded Staleness consistency level, this value represents the time amount of staleness (in seconds) tolerated. Accepted range for this value is 5 - 86400 (1 day). Defaults to 10. Required when consistency_level is set to BoundedStaleness."
   type        = number
   default     = 10
 }
 
 variable "consistency_policy_max_staleness_prefix" {
-  description = "When used with the Bounded Staleness consistency level, this value represents the number of stale requests tolerated. Accepted range for this value is 10 – 2147483647. Defaults to 100. Required when consistency_level is set to BoundedStaleness."
+  description = "When used with the Bounded Staleness consistency level, this value represents the number of stale requests tolerated. Accepted range for this value is 10 – 2147483647. Defaults to 200. Required when `consistency_level` is set to `BoundedStaleness`."
   type        = number
   default     = 200
 }
 
 variable "backup" {
-  description = "Backup block with type (Continuous / Periodic), tier (Continuous7Days / Continuous30Days), interval_in_minutes, retention_in_hours keys and storage_redundancy."
+  description = "Backup block with `type` (`Continuous` or `Periodic`), `tier` (`Continuous7Days` or `Continuous30Days`), `interval_in_minutes`, `retention_in_hours` and `storage_redundancy`."
   type = object({
     type                = string
     tier                = optional(string)
@@ -134,9 +134,15 @@ variable "analytical_storage_type" {
 }
 
 variable "identity_type" {
-  description = "CosmosDB identity type. Possible values for type are: `null` and `SystemAssigned`."
+  description = "CosmosDB identity type. Possible values for type are: `null`, `SystemAssigned`, `SystemAssigned, UserAssigned`."
   type        = string
   default     = "SystemAssigned"
+}
+
+variable "identity_ids" {
+  description = "User Assigned Identities IDs to add to Function App. Mandatory if `var.identity_type` contains `UserAssigned`."
+  type        = list(string)
+  default     = null
 }
 
 variable "free_tier_enabled" {
