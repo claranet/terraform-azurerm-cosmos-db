@@ -1,5 +1,5 @@
-resource "azurerm_cosmosdb_account" "db" {
-  name = local.cosmosdb_name
+resource "azurerm_cosmosdb_account" "main" {
+  name = local.name
 
   location            = var.location
   resource_group_name = var.resource_group_name
@@ -7,16 +7,16 @@ resource "azurerm_cosmosdb_account" "db" {
   offer_type           = var.offer_type
   kind                 = var.kind
   mongo_server_version = var.kind == "MongoDB" ? var.mongo_server_version : null
-  enable_free_tier     = var.free_tier_enabled
+  free_tier_enabled    = var.free_tier_enabled
 
-  enable_automatic_failover = true
+  automatic_failover_enabled = true
 
   analytical_storage_enabled = var.analytical_storage_enabled
 
   dynamic "analytical_storage" {
-    for_each = var.analytical_storage_type != null ? ["enabled"] : []
+    for_each = var.analytical_storage_type[*]
     content {
-      schema_type = var.analytical_storage_type
+      schema_type = analytical_storage.value
     }
   }
 
@@ -42,11 +42,11 @@ resource "azurerm_cosmosdb_account" "db" {
     }
   }
 
-  ip_range_filter = join(",", var.allowed_cidrs)
+  ip_range_filter = var.allowed_cidrs
 
   public_network_access_enabled         = var.public_network_access_enabled
   is_virtual_network_filter_enabled     = var.is_virtual_network_filter_enabled
-  network_acl_bypass_for_azure_services = var.network_acl_bypass_for_azure_services
+  network_acl_bypass_for_azure_services = var.network_acl_bypass_for_azure_services_enabled
   network_acl_bypass_ids                = var.network_acl_bypass_ids
 
   dynamic "virtual_network_rule" {
@@ -69,11 +69,18 @@ resource "azurerm_cosmosdb_account" "db" {
   }
 
   dynamic "identity" {
-    for_each = var.identity_type != null ? ["enabled"] : []
+    for_each = var.identity_type[*]
     content {
-      type = var.identity_type
+      type = identity.value
+      # Avoid perpetual changes if SystemAssigned and identity_ids is not null
+      identity_ids = endswith(identity.value, "UserAssigned") ? var.identity_ids : null
     }
   }
 
   tags = merge(local.default_tags, var.extra_tags)
+}
+
+moved {
+  from = azurerm_cosmosdb_account.db
+  to   = azurerm_cosmosdb_account.main
 }
