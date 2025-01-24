@@ -1,14 +1,14 @@
 ## Specific CosmosDB parameters
 
 variable "offer_type" {
-  type        = string
   description = "Specifies the Offer Type to use for this CosmosDB Account - currently this can only be set to Standard."
+  type        = string
   default     = "Standard"
 }
 
 variable "kind" {
-  type        = string
   description = "Specifies the Kind of CosmosDB to create - possible values are `GlobalDocumentDB` and `MongoDB`."
+  type        = string
   default     = "GlobalDocumentDB"
 }
 
@@ -31,7 +31,6 @@ variable "failover_locations" {
 }
 
 variable "capabilities" {
-  type        = list(string)
   description = <<EOD
 Configures the capabilities to enable for this Cosmos DB account:
 Possible values are
@@ -39,12 +38,13 @@ Possible values are
   EnableAggregationPipeline, EnableCassandra, EnableGremlin,EnableMongo, EnableTable, EnableServerless,
   MongoDBv3.4 and mongoEnableDocLevelTTL.
 EOD
+  type        = list(string)
   default     = []
 }
 
 variable "allowed_cidrs" {
-  type        = list(string)
   description = "CosmosDB Firewall Support: This value specifies the set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IP's for a given database account."
+  type        = list(string)
   default     = []
 }
 
@@ -75,7 +75,7 @@ variable "network_acl_bypass_ids" {
 variable "virtual_network_rule" {
   description = "Specifies a `virtual_network_rules` resource used to define which subnets are allowed to access this CosmosDB account."
   type = list(object({
-    id                                   = string,
+    id                                   = string
     ignore_missing_vnet_service_endpoint = bool
   }))
   default = null
@@ -140,7 +140,7 @@ variable "identity_type" {
 }
 
 variable "identity_ids" {
-  description = "User Assigned Identities IDs to add to Function App. Mandatory if `var.identity_type` contains `UserAssigned`."
+  description = "User Assigned Identities IDs to add to this resource. Mandatory if `var.identity_type` contains `UserAssigned`."
   type        = list(string)
   default     = null
 }

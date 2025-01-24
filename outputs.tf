@@ -1,10 +1,10 @@
 output "id" {
-  description = "The CosmosDB Account ID."
+  description = "The CosmosDB account ID."
   value       = azurerm_cosmosdb_account.main.id
 }
 
 output "name" {
-  description = "The CosmosDB Account Name."
+  description = "The CosmosDB account name."
   value       = azurerm_cosmosdb_account.main.name
 }
 
@@ -24,25 +24,25 @@ output "write_endpoints" {
 }
 
 output "primary_master_key" {
-  description = "The Primary master key for the CosmosDB Account."
+  description = "The primary master key for the CosmosDB account."
   value       = azurerm_cosmosdb_account.main.primary_key
   sensitive   = true
 }
 
 output "secondary_master_key" {
-  description = " The Secondary master key for the CosmosDB Account."
+  description = " The secondary master key for the CosmosDB account."
   value       = azurerm_cosmosdb_account.main.secondary_key
   sensitive   = true
 }
 
 output "primary_readonly_master_key" {
-  description = "The Primary read-only master Key for the CosmosDB Account."
+  description = "The primary read-only master key for the CosmosDB account."
   value       = azurerm_cosmosdb_account.main.primary_readonly_key
   sensitive   = true
 }
 
 output "secondary_readonly_master_key" {
-  description = "The Secondary read-only master key for the CosmosDB Account."
+  description = "The secondary read-only master key for the CosmosDB account."
   value       = azurerm_cosmosdb_account.main.secondary_readonly_key
   sensitive   = true
 }

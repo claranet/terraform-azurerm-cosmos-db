@@ -14,9 +14,9 @@ resource "azurerm_cosmosdb_account" "main" {
   analytical_storage_enabled = var.analytical_storage_enabled
 
   dynamic "analytical_storage" {
-    for_each = var.analytical_storage_type != null ? ["enabled"] : []
+    for_each = var.analytical_storage_type[*]
     content {
-      schema_type = var.analytical_storage_type
+      schema_type = analytical_storage.value
     }
   }
 
@@ -69,11 +69,11 @@ resource "azurerm_cosmosdb_account" "main" {
   }
 
   dynamic "identity" {
-    for_each = var.identity_type != null ? ["identity"] : []
+    for_each = var.identity_type[*]
     content {
-      type = var.identity_type
+      type = identity.value
       # Avoid perpetual changes if SystemAssigned and identity_ids is not null
-      identity_ids = var.identity_type == "UserAssigned" ? var.identity_ids : null
+      identity_ids = endswith(identity.value, "UserAssigned") ? var.identity_ids : null
     }
   }
 

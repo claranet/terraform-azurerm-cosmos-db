@@ -107,7 +107,7 @@ module "cosmosdb" {
 | extra\_tags | Map of custom tags. | `map(string)` | `{}` | no |
 | failover\_locations | The name of the Azure region to host replicated data and their priority. | `map(map(string))` | `null` | no |
 | free\_tier\_enabled | Enable the option to opt-in for the free database account within subscription. | `bool` | `false` | no |
-| identity\_ids | User Assigned Identities IDs to add to Function App. Mandatory if `var.identity_type` contains `UserAssigned`. | `list(string)` | `null` | no |
+| identity\_ids | User Assigned Identities IDs to add to this resource. Mandatory if `var.identity_type` contains `UserAssigned`. | `list(string)` | `null` | no |
 | identity\_type | CosmosDB identity type. Possible values for type are: `null`, `SystemAssigned`, `SystemAssigned, UserAssigned`. | `string` | `"SystemAssigned"` | no |
 | is\_virtual\_network\_filter\_enabled | Enables virtual network filtering for this Cosmos DB account. | `bool` | `false` | no |
 | kind | Specifies the Kind of CosmosDB to create - possible values are `GlobalDocumentDB` and `MongoDB`. | `string` | `"GlobalDocumentDB"` | no |
@@ -125,7 +125,7 @@ module "cosmosdb" {
 | public\_network\_access\_enabled | Whether or not public network access is allowed for this CosmosDB account. | `bool` | `false` | no |
 | resource\_group\_name | Resource Group the resources will belong to. | `string` | n/a | yes |
 | stack | Stack name. | `string` | n/a | yes |
-| virtual\_network\_rule | Specifies a `virtual_network_rules` resource used to define which subnets are allowed to access this CosmosDB account. | <pre>list(object({<br/>    id                                   = string,<br/>    ignore_missing_vnet_service_endpoint = bool<br/>  }))</pre> | `null` | no |
+| virtual\_network\_rule | Specifies a `virtual_network_rules` resource used to define which subnets are allowed to access this CosmosDB account. | <pre>list(object({<br/>    id                                   = string<br/>    ignore_missing_vnet_service_endpoint = bool<br/>  }))</pre> | `null` | no |
 | zone\_redundancy\_enabled | True to enabled zone redundancy on default primary location. | `bool` | `true` | no |
 
 ## Outputs
@@ -133,16 +133,16 @@ module "cosmosdb" {
 | Name | Description |
 |------|-------------|
 | endpoint | The endpoint used to connect to the CosmosDB account. |
-| id | The CosmosDB Account ID. |
+| id | The CosmosDB account ID. |
 | identity\_principal\_id | CosmosDB account system identity principal ID. |
 | module\_diagnostics | Diagnostics settings module outputs. |
-| name | The CosmosDB Account Name. |
-| primary\_master\_key | The Primary master key for the CosmosDB Account. |
-| primary\_readonly\_master\_key | The Primary read-only master Key for the CosmosDB Account. |
+| name | The CosmosDB account name. |
+| primary\_master\_key | The primary master key for the CosmosDB account. |
+| primary\_readonly\_master\_key | The primary read-only master key for the CosmosDB account. |
 | read\_endpoints | A list of read endpoints available for this CosmosDB account. |
 | resource | CosmosDB resource object. |
-| secondary\_master\_key | The Secondary master key for the CosmosDB Account. |
-| secondary\_readonly\_master\_key | The Secondary read-only master key for the CosmosDB Account. |
+| secondary\_master\_key | The secondary master key for the CosmosDB account. |
+| secondary\_readonly\_master\_key | The secondary read-only master key for the CosmosDB account. |
 | write\_endpoints | A list of write endpoints available for this CosmosDB account. |
 <!-- END_TF_DOCS -->
 ## Related documentation
