@@ -42,6 +42,12 @@ EOD
   default     = []
 }
 
+variable "burst_capacity_enabled" {
+  description = "Enable burst capacity for this Cosmos DB account"
+  type = bool
+  default = false
+}
+
 variable "allowed_cidrs" {
   description = "CosmosDB Firewall Support: This value specifies the set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IP's for a given database account."
   type        = list(string)
