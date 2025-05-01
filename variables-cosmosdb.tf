@@ -43,9 +43,9 @@ EOD
 }
 
 variable "burst_capacity_enabled" {
-  description = "Enable burst capacity for this Cosmos DB account"
-  type = bool
-  default = false
+  description = "Enable burst capacity for this Cosmos DB account."
+  type        = bool
+  default     = false
 }
 
 variable "allowed_cidrs" {
