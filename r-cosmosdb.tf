@@ -42,6 +42,8 @@ resource "azurerm_cosmosdb_account" "main" {
     }
   }
 
+  burst_capacity_enabled = var.burst_capacity_enabled
+
   ip_range_filter = var.allowed_cidrs
 
   public_network_access_enabled         = var.public_network_access_enabled
