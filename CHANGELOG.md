@@ -1,3 +1,31 @@
+## 8.1.0 (2025-05-05)
+
+### Features
+
+* **GH-7:** add burst capacity enabled variable 803814b
+
+### Documentation
+
+* **GH-7:** add burst capacity enabled variable documentation 5359be4
+
+### Miscellaneous Chores
+
+* **deps:** update dependency opentofu to v1.9.1 097c653
+* **deps:** update dependency pre-commit to v4.2.0 591e24f
+* **deps:** update dependency terraform-docs to v0.20.0 c1baa2d
+* **deps:** update dependency tflint to v0.56.0 90e3a09
+* **deps:** update dependency tflint to v0.57.0 068de51
+* **deps:** update dependency trivy to v0.59.1 61ab177
+* **deps:** update dependency trivy to v0.60.0 c584435
+* **deps:** update dependency trivy to v0.61.0 f41f051
+* **deps:** update dependency trivy to v0.61.1 2b787e4
+* **deps:** update dependency trivy to v0.62.0 1a8dad1
+* **deps:** update pre-commit hook alessandrojcm/commitlint-pre-commit-hook to v9.21.0 aac7db7
+* **deps:** update pre-commit hook alessandrojcm/commitlint-pre-commit-hook to v9.22.0 145314f
+* **deps:** update pre-commit hook tofuutils/pre-commit-opentofu to v2.2.0 27aad8e
+* **deps:** update tools 2b4f0fd
+* update Github templates 829e407
+
 ## 8.0.0 (2025-01-24)
 
 ### ⚠ BREAKING CHANGES
