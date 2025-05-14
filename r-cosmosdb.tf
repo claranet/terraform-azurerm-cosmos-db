@@ -9,6 +9,8 @@ resource "azurerm_cosmosdb_account" "main" {
   mongo_server_version = var.kind == "MongoDB" ? var.mongo_server_version : null
   free_tier_enabled    = var.free_tier_enabled
 
+  access_key_metadata_writes_enabled = var.access_key_metadata_writes_enabled
+
   automatic_failover_enabled = true
 
   analytical_storage_enabled = var.analytical_storage_enabled

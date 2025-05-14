@@ -156,3 +156,9 @@ variable "free_tier_enabled" {
   type        = bool
   default     = false
 }
+
+variable "access_key_metadata_writes_enabled" {
+  description = "Is write operations on metadata resources (databases, containers, throughput) via account keys enabled?"
+  type        = bool
+  default     = true
+}
