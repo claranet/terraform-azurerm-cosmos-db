@@ -1,3 +1,13 @@
+## 8.2.0 (2025-05-16)
+
+### Features
+
+* **AZ-1553:** ✨ add access_key_metadata_writes_enabled parameter 84ffb1f
+
+### Miscellaneous Chores
+
+* **deps:** update dependency trivy to v0.62.1 33ec55d
+
 ## 8.1.0 (2025-05-05)
 
 ### Features
