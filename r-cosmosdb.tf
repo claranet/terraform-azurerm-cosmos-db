@@ -82,6 +82,10 @@ resource "azurerm_cosmosdb_account" "main" {
   }
 
   tags = merge(local.default_tags, var.extra_tags)
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 moved {
