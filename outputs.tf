@@ -60,4 +60,5 @@ output "module_diagnostics" {
 output "resource" {
   description = "CosmosDB resource object."
   value       = azurerm_cosmosdb_account.main
+  sensitive   = true
 }
