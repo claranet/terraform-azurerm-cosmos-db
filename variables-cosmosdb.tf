@@ -134,7 +134,7 @@ variable "analytical_storage_type" {
   default     = null
 
   validation {
-    condition     = try(contains(["FullFidelity", "WellDefined"], var.analytical_storage_type), true)
+    condition     = var.analytical_storage_type == null || contains(["FullFidelity", "WellDefined"], var.analytical_storage_type)
     error_message = "The `analytical_storage_type` value must be valid. Possible values are `FullFidelity` and `WellDefined`."
   }
 }
