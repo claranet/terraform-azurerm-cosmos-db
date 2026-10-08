@@ -1,3 +1,15 @@
+## 9.0.1 (2026-10-08)
+
+### Bug Fixes
+
+* **variables:** accept null analytical_storage_type with OpenTofu 1.13 d4cc145
+
+### Miscellaneous Chores
+
+* **deps:** ⬆️ update tools 🔗 a08da55
+* **deps:** update dependency opentofu to v1.13.0 92163c2
+* **deps:** update dependency opentofu to v1.13.1 d79043b
+
 ## 9.0.0 (2026-08-24)
 
 ### ⚠ BREAKING CHANGES
